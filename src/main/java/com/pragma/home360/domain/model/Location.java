@@ -1,4 +1,4 @@
-package com.pragma.home360.home.domain.model;
+package com.pragma.home360.domain.model;
 
 public class Location {
 }

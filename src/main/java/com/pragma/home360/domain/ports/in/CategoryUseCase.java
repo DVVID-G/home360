@@ -1,4 +1,7 @@
 package com.pragma.home360.domain.ports.in;
 
-public class CategoryUseCases {
+import com.pragma.home360.domain.model.Category;
+
+public interface CategoryUseCase {
+    Category createCategory(Category category);
 }
