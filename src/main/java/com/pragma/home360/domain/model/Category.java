@@ -9,8 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "El nombre de la categoría no puede estar vacío")
     @Size(max = 50, message = "El nombre de la categoría no puede tener más de 50 caracteres")
@@ -31,7 +30,7 @@ public class Category {
         return description;
     }
 
-    public void setId(Long id) {
+    public void setId (Long id) {
         this.id = id;
     }
 

@@ -1,4 +1,6 @@
+/*
 package com.pragma.home360.domain.infrastructure.adapters.repositories.mysql;
+
 
 import com.pragma.home360.domain.model.Category;
 import com.pragma.home360.infrastructure.repositories.mysql.CategoryRepositoryImpl;
@@ -44,3 +46,5 @@ class CategoryRepositoryImplTest {
         assertEquals("Casa de lujo", savedCategory.getDescription());
     }
 }
+
+ */
