@@ -17,7 +17,7 @@ class CategoryServiceTest {
     private CategoryRepository categoryRepository;
 
     @InjectMocks
-    private CategoryService categoryService;
+    private CategoryService2 categoryService;
 
     @BeforeEach
     void setUp() {
@@ -31,7 +31,6 @@ class CategoryServiceTest {
         Category category = new Category();
         category.setName("Casa");
         category.setDescription("Descripción válida");
-
 
         when(categoryRepository.existsByName("Casa")).thenReturn(false);
         when(categoryRepository.save(category)).thenReturn(category);

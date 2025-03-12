@@ -1,8 +1,5 @@
 package com.pragma.home360.domain.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
