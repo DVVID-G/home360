@@ -9,11 +9,11 @@ import java.util.Objects;
 
 public class CategoryModel {
 
-    private long id;
+    private Long id;
     private String name;
     private String description;
 
-    public CategoryModel(long id, String name, String description) {
+    public CategoryModel(Long id, String name, String description) {
         if (name.length() > 50) throw new NameMaxSizeExceededException();
         if (description.length() > 90) throw new DescriptionMaxSizeExceededException();
         this.id = id;
