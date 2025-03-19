@@ -1,4 +1,4 @@
-package com.pragma.commons.configurations.utils;
+package com.pragma.home360.infrastructure.configurations.utils;
 
 public final class Constants {
     private Constants() {

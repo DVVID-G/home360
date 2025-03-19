@@ -28,4 +28,5 @@ public class CategoryController {
                                                                    @RequestParam boolean orderAsc) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
     }
+
 }

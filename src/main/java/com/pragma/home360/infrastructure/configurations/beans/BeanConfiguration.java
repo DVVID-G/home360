@@ -1,8 +1,8 @@
-package com.pragma.commons.configurations.beans;
+package com.pragma.home360.infrastructure.configurations.beans;
 
 import com.pragma.home360.domain.ports.in.CategoryServicePort;
 import com.pragma.home360.domain.ports.out.CategoryPersistencePort;
-import com.pragma.home360.domain.usecases.CategoryUseCase;
+import com.pragma.home360.application.usecases.CategoryUseCase;
 import com.pragma.home360.infrastructure.adapters.persistence.CategoryPersistenceAdapter;
 import com.pragma.home360.infrastructure.mappers.CategoryEntityMapper;
 import com.pragma.home360.infrastructure.repositories.mysql.CategoryRepository;
