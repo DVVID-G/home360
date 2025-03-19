@@ -28,4 +28,8 @@ public class CategoryController {
                                                                    @RequestParam boolean orderAsc) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
     }
+    @GetMapping("/byname")
+    public ResponseEntity<List<CategoryResponse>> getCategoryByName(@RequestParam String categoryName) {
+        return ResponseEntity.ok(categoryService.getCategoryByName(categoryName));
+    }
 }
