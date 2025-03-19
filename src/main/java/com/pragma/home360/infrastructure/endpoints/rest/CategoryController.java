@@ -19,8 +19,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/")
-    public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest SavecategoryRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(SavecategoryRequest));
+    public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest savecategoryRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(savecategoryRequest));
     }
 
     @GetMapping("/")
