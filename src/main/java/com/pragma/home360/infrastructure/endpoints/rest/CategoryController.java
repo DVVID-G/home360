@@ -19,13 +19,17 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/")
-    public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest SavecategoryRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(SavecategoryRequest));
+    public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest savecategoryRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(savecategoryRequest));
     }
 
     @GetMapping("/")
     public ResponseEntity<List<CategoryResponse>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size,
                                                                    @RequestParam boolean orderAsc) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
+    }
+    @GetMapping("/byname")
+    public ResponseEntity<List<CategoryResponse>> getCategoryByName(@RequestParam String categoryName) {
+        return ResponseEntity.ok(categoryService.getCategoryByName(categoryName));
     }
 }

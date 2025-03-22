@@ -32,4 +32,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategories(page, size, orderAsc));
     }
 
+    @Override
+    public List<CategoryResponse> getCategoryByName(String categoryName) {
+        return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategoryByName(categoryName));
+    }
+
 }
