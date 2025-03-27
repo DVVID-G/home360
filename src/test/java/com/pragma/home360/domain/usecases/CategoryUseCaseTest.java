@@ -34,6 +34,13 @@ class CategoryUseCaseTest {
     }
 
     @Test
+    void saveCategoryAlreadyExists() {
+        CategoryModel categoryModel = new CategoryModel(1L, "name", "description");
+        when(categoryPersistencePort.getCategoryByName("name")).thenReturn(categoryModel);
+        assertThrows(Exception.class, () -> categoryUseCase.save(categoryModel));
+    }
+
+    @Test
     void getCategories() {
         // Arrange
         List<CategoryModel> mockCategories = Arrays.asList(
