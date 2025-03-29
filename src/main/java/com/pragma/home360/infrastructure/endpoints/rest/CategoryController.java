@@ -4,6 +4,7 @@ import com.pragma.home360.application.dto.request.SaveCategoryRequest;
 import com.pragma.home360.application.dto.response.CategoryResponse;
 import com.pragma.home360.application.dto.response.SaveCategoryResponse;
 import com.pragma.home360.application.services.CategoryService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,6 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,10 +93,14 @@ public class CategoryController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @GetMapping("/")
-    public ResponseEntity<List<CategoryResponse>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size,
-                                                                   @RequestParam boolean orderAsc) {
-        return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
+    public ResponseEntity<Page<CategoryResponse>> getAllCategories(Pageable pageable) {
+        boolean orderAsc = true; // O extraer el orden del pageable
+
+        return ResponseEntity.ok(categoryService.getCategories(pageable.getPageNumber(), pageable.getPageSize(), orderAsc));
     }
+
+
+
     @GetMapping("/byname")
     public ResponseEntity<List<CategoryResponse>> getCategoryByName(@RequestParam String categoryName) {
         return ResponseEntity.ok(categoryService.getCategoryByName(categoryName));
