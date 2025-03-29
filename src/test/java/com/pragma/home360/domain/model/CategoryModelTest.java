@@ -1,9 +1,12 @@
 package com.pragma.home360.domain.model;
 
+import com.pragma.home360.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.pragma.home360.domain.exceptions.NameMaxSizeExceededException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CategoryModelTest {
 
@@ -47,4 +50,21 @@ class CategoryModelTest {
         assertEquals("Un apartamento moderno", category.getDescription());
 
     }
+    @Test
+    void constructorNameIsTooLong() {
+        String longName = "a".repeat(51); // 51 caracteres
+        // Se espera que se lance NameMaxSizeExceededException
+        assertThrows(NameMaxSizeExceededException.class, () ->
+                new CategoryModel(1L, longName, "description"));
+    }
+
+    @Test
+    void constructorDescriptionIsTooLong() {
+        String longDescription = "a".repeat(121);
+        assertThrows(DescriptionMaxSizeExceededException.class, () ->
+                new CategoryModel(1L, "name", longDescription));
+    }
+
+
+
 }

@@ -15,4 +15,5 @@ public interface CategoryDtoMapper {
     CategoryModel requestToModel(SaveCategoryRequest saveCategoryRequest);
     CategoryResponse modelToResponse(CategoryModel categoryModel);
     List<CategoryResponse> modelListToResponseList(List<CategoryModel> categories);
+    CategoryResponse entityToResponse(CategoryEntity categoryEntity);
 }
