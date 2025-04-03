@@ -1,0 +1,34 @@
+package com.pragma.home360.infrastructure.adapters.persistence;
+
+import com.pragma.home360.domain.model.LocationModel;
+import com.pragma.home360.domain.ports.out.LocationPersistencePort;
+import com.pragma.home360.infrastructure.mappers.LocationEntityMapper;
+import com.pragma.home360.infrastructure.repositories.mysql.LocationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class LocationPersistenceAdapter implements LocationPersistencePort {
+    private final LocationRepository locationRepository;
+    private final LocationEntityMapper locationEntityMapper;
+
+    @Override
+    public void save(LocationModel locationModel) {
+        locationRepository.save(locationEntityMapper.modelToEntity(locationModel));
+    }
+
+    @Override
+    public List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc) {
+        return locationEntityMapper.entityListToModelList(locationRepository.findAll());
+    }
+
+    @Override
+    public LocationModel getLocationById(Long id) {
+        return locationEntityMapper.entityToModel(locationRepository.findById(id).orElse(null));
+    }
+}
