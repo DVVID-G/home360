@@ -37,4 +37,11 @@ public class DeparmentPersistenceAdapter implements DeparmentPersistencePort {
         return deparmentEntityMapper.entityListToModelList(deparmentRepository.findAll(pagination).getContent());
     }
 
+    @Override
+    public DeparmentModel getByName(String name) {
+        return deparmentRepository.findByName(name)
+                .map(deparmentEntityMapper::entityToModel)
+                .orElse(null); // o lanza una excepción si prefieres
+    }
+
 }

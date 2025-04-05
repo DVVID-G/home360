@@ -7,4 +7,5 @@ import java.util.List;
 public interface DeparmentPersistencePort {
     void save(DeparmentModel deparmentModel);
     List<DeparmentModel> getDeparments(Integer page, Integer size, boolean orderAsc);
+    DeparmentModel getByName(String deparmentName);
 }

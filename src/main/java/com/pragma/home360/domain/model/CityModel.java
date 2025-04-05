@@ -5,12 +5,14 @@ public class CityModel {
     private Long id;
     private String name;
     private String description;
+    private Long deparmentId;
 
     public CityModel() { }
-    public CityModel(Long id, String name, String description) {
+    public CityModel(Long id, String name, String description, Long deparmentId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.deparmentId = deparmentId;
     }
 
     public Long getId() {
@@ -37,4 +39,11 @@ public class CityModel {
         this.description = description;
     }
 
+    public Long getDeparmentId() {
+        return deparmentId;
+    }
+
+    public void setDeparmentId(Long deparmentId) {
+        this.deparmentId = deparmentId;
+    }
 }

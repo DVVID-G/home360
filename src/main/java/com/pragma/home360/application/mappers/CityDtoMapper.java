@@ -22,11 +22,11 @@ public interface CityDtoMapper {
     @Mapping(source = "name", target = "cityName")
     @Mapping(source = "description", target = "cityDescription")
     CityResponse requestToResponse(CityModel cityModel);
-
+    @Mapping(source = "name", target = "cityName")
+    @Mapping(source = "description", target = "cityDescription")
     List<CityResponse> modelListToResponseList(List<CityModel> cities);
 
     // Si usas este metodo para mapear directamente de entidad a DTO, también debes configurar el mapeo
-    @Mapping(source = "name", target = "cityName")
-    @Mapping(source = "description", target = "cityDescription")
+
     CityResponse entityToResponse(CityEntity cityEntity);
 }
