@@ -26,7 +26,4 @@ public interface CityDtoMapper {
     @Mapping(source = "description", target = "cityDescription")
     List<CityResponse> modelListToResponseList(List<CityModel> cities);
 
-    // Si usas este metodo para mapear directamente de entidad a DTO, también debes configurar el mapeo
-
-    CityResponse entityToResponse(CityEntity cityEntity);
 }

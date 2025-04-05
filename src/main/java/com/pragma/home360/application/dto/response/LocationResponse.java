@@ -1,5 +1,6 @@
 package com.pragma.home360.application.dto.response;
 
 
-public record LocationResponse(Long id, Long cityId,String barrio) {
+public record LocationResponse(Long id, Long cityId,String barrio, String cityName) {
+
 }

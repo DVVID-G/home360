@@ -6,6 +6,7 @@ import com.pragma.home360.domain.model.CityModel;
 import com.pragma.home360.domain.ports.out.CityPersistencePort;
 import com.pragma.home360.infrastructure.mappers.CityEntityMapper;
 import com.pragma.home360.infrastructure.repositories.mysql.CityRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,13 @@ public class CityPersistenceAdapter implements CityPersistencePort {
         if (orderAsc) pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
         else pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
         return cityEntityMapper.entityListToModelList(cityRepository.findAll(pagination).getContent());
+    }
+
+    @Override
+    public CityModel getByName(String name) {
+        return cityRepository.findByName(name) // Suponiendo que existe este método en CityRepository
+                .map(cityEntityMapper::entityToModel)
+                .orElseThrow(() -> new EntityNotFoundException("Ciudad no encontrada: " + name));
     }
 
 }

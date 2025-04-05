@@ -8,7 +8,6 @@ import com.pragma.home360.application.dto.response.SaveCityResponse;
 import com.pragma.home360.application.mappers.CityDtoMapper;
 import com.pragma.home360.application.services.CityService;
 import com.pragma.home360.domain.ports.in.CityServicePort;
-import com.pragma.home360.domain.ports.out.DeparmentPersistencePort;
 import com.pragma.home360.domain.usecases.CityUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface CityRepository extends JpaRepository<CityEntity, Long> {
     Page<CityEntity> findAll(Pageable pageable);
+    Optional<CityEntity> findByName(String name);
     /*@Query("SELECT c FROM CityEntity c JOIN FETCH c.deparment WHERE c.name = :name")
     Optional<CityEntity> findByNameWithDepartment(@Param("name") String name);*/
 }

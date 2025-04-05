@@ -3,6 +3,7 @@ package com.pragma.commons.configurations.beans;
 import com.pragma.home360.domain.ports.in.CategoryServicePort;
 import com.pragma.home360.domain.ports.in.CityServicePort;
 import com.pragma.home360.domain.ports.in.DeparmentServicePort;
+import com.pragma.home360.domain.ports.in.LocationServicePort;
 import com.pragma.home360.domain.ports.out.CategoryPersistencePort;
 import com.pragma.home360.domain.ports.out.CityPersistencePort;
 import com.pragma.home360.domain.ports.out.DeparmentPersistencePort;
@@ -10,6 +11,7 @@ import com.pragma.home360.domain.ports.out.LocationPersistencePort;
 import com.pragma.home360.domain.usecases.CategoryUseCase;
 import com.pragma.home360.domain.usecases.CityUseCase;
 import com.pragma.home360.domain.usecases.DeparmentUsecase;
+import com.pragma.home360.domain.usecases.LocationUseCase;
 import com.pragma.home360.infrastructure.adapters.persistence.CategoryPersistenceAdapter;
 import com.pragma.home360.infrastructure.adapters.persistence.CityPersistenceAdapter;
 import com.pragma.home360.infrastructure.adapters.persistence.DeparmentPersistenceAdapter;
@@ -67,6 +69,10 @@ public class BeanConfiguration {
     @Bean
     public CityServicePort cityServicePort() {
         return new CityUseCase(cityPersistencePort(), deparmentPersistencePort());
+    }
+    @Bean
+    public LocationServicePort locationServicePort() {
+        return new LocationUseCase(locationPersistencePort(), cityPersistencePort());
     }
 
 
