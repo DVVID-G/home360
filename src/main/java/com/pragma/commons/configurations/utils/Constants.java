@@ -10,4 +10,6 @@ public final class Constants {
     public static final String SAVE_LOCATION_RESPONSE_MESSAGE = "Location created successfully.";
     public static final String SAVE_DEPARMENT_RESPONSE_MESSAGE = "Department created successfully.";
     public static final String SAVE_CITY_RESPONSE_MESSAGE = "City created successfully.";
+    public static final String LOCATION_PAGEABLE_FIELD_NAME = "barrio";
+
 }
