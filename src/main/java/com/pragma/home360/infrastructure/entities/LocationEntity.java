@@ -16,12 +16,5 @@ public class LocationEntity {
     private Long id;
     private String barrio;
     @ManyToOne
-    @JoinColumn(name = "city_id")
     private CityEntity city;
-    @Transient
-
-    public String getDepartmentName() {
-        return city != null ? city.getDeparment().getName() : null;
-    }
-
 }

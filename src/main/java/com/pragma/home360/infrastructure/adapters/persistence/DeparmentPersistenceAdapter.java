@@ -1,11 +1,16 @@
 package com.pragma.home360.infrastructure.adapters.persistence;
 
+import com.pragma.commons.configurations.utils.Constants;
+import com.pragma.home360.domain.model.CityModel;
 import com.pragma.home360.domain.model.DeparmentModel;
 
 import com.pragma.home360.domain.ports.out.DeparmentPersistencePort;
 import com.pragma.home360.infrastructure.mappers.DeparmentEntityMapper;
 import com.pragma.home360.infrastructure.repositories.mysql.DeparmentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +31,10 @@ public class DeparmentPersistenceAdapter implements DeparmentPersistencePort {
 
     @Override
     public List<DeparmentModel> getDeparments(Integer page, Integer size, boolean orderAsc) {
-        return deparmentEntityMapper.entityListToModelList(deparmentRepository.findAll());
+        Pageable pagination;
+        if (orderAsc) pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
+        else pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
+        return deparmentEntityMapper.entityListToModelList(deparmentRepository.findAll(pagination).getContent());
     }
 
 }

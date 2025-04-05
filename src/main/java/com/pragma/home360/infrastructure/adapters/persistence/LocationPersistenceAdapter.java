@@ -27,8 +27,4 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
         return locationEntityMapper.entityListToModelList(locationRepository.findAll());
     }
 
-    @Override
-    public LocationModel getLocationById(Long id) {
-        return locationEntityMapper.entityToModel(locationRepository.findById(id).orElse(null));
-    }
 }

@@ -1,16 +1,16 @@
 package com.pragma.home360.domain.model;
 
+
 public class CityModel {
     private Long id;
     private String name;
     private String description;
-    private DeparmentModel deparment;
 
-    public CityModel(Long id, String name, String description, DeparmentModel deparment) {
+    public CityModel() { }
+    public CityModel(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.deparment = deparment;
     }
 
     public Long getId() {
@@ -37,11 +37,4 @@ public class CityModel {
         this.description = description;
     }
 
-    public DeparmentModel getDeparment() {
-        return deparment;
-    }
-
-    public void setDeparment(DeparmentModel deparment) {
-        this.deparment = deparment;
-    }
 }

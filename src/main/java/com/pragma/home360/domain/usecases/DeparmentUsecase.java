@@ -16,6 +16,7 @@ public class DeparmentUsecase implements DeparmentServicePort {
 
     @Override
     public void save(DeparmentModel deparmentModel) {
+
         deparmentPersistencePort.save(deparmentModel);
     }
     @Override

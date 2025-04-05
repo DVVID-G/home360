@@ -27,8 +27,8 @@ public class LocationController {
     @GetMapping("/")
     public ResponseEntity<List<LocationModel>> getLocations(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size,
-            @RequestParam(value = "orderAsc", defaultValue = "true") boolean orderAsc) {
+            @RequestParam(value = "size", defaultValue = "15") Integer size,
+            @RequestParam(value = "orderAsc", defaultValue = "false") boolean orderAsc) {
         return ResponseEntity.ok(locationService.getLocations(page, size, orderAsc));
     }
 }

@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface LocationPersistencePort {
     void save(LocationModel locationModel);
-    LocationModel getLocationById(Long id);
     List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc);
 }

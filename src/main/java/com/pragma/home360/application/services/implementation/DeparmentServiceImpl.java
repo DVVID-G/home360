@@ -2,10 +2,10 @@ package com.pragma.home360.application.services.implementation;
 
 import com.pragma.commons.configurations.utils.Constants;
 import com.pragma.home360.application.dto.request.SaveDeparmentRequest;
+import com.pragma.home360.application.dto.response.DeparmentResponse;
 import com.pragma.home360.application.dto.response.SaveDeparmentResponse;
 import com.pragma.home360.application.mappers.DeparmentDtoMapper;
 import com.pragma.home360.application.services.DeparmentService;
-import com.pragma.home360.domain.model.DeparmentModel;
 import com.pragma.home360.domain.ports.in.DeparmentServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class DeparmentServiceImpl implements DeparmentService {
     }
 
     @Override
-    public List<DeparmentModel> getDeparments(Integer page, Integer size, boolean orderAsc) {
-        return deparmentServicePort.getDeparments(page, size, orderAsc);
+    public List<DeparmentResponse> getDeparments(Integer page, Integer size, boolean orderAsc) {
+        return deparmentDtoMapper.modelListToResponseList(deparmentServicePort.getDeparments(page, size, orderAsc));
     }
 
 }

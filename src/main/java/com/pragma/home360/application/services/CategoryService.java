@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface CategoryService {//Interfaz que define los métodos que se deben implementar para el servicio de categorías.
-    SaveCategoryResponse save(SaveCategoryRequest request);//Guarda una categoría en la base de datos y devuelve un objeto SaveCategoryResponse.
-    Page<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc);//Devuelve una lista de categorías paginada y ordenada.
-    List<CategoryResponse> getCategoryByName(String categoryName);//Devuelve una lista de categorías que coinciden con el nombre de la categoría.
+public interface CategoryService {
+    SaveCategoryResponse save(SaveCategoryRequest request);
+    Page<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc);
+    List<CategoryResponse> getCategoryByName(String categoryName);
 }
