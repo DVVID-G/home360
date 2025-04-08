@@ -1,9 +1,7 @@
 package com.pragma.home360.application.services.implementation;
 
 import com.pragma.commons.configurations.utils.Constants;
-import com.pragma.home360.application.dto.request.SaveCityRequest;
 import com.pragma.home360.application.dto.request.SaveLocationRequest;
-import com.pragma.home360.application.dto.response.SaveCityResponse;
 import com.pragma.home360.application.dto.response.SaveLocationResponse;
 import com.pragma.home360.application.mappers.LocationDtoMapper;
 import com.pragma.home360.application.services.LocationService;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
@@ -26,8 +25,8 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public SaveLocationResponse save(SaveLocationRequest locationRequest) {
-        var cityModel = locationDtoMapper.requestToModel(locationRequest);
-        locationUseCase.save(cityModel, locationRequest.cityName());
+        var locationModel = locationDtoMapper.requestToModel(locationRequest);
+        locationUseCase.save(locationModel, locationRequest.cityName());
         return new SaveLocationResponse(Constants.SAVE_CITY_RESPONSE_MESSAGE,
                 LocalDateTime.now());
     }

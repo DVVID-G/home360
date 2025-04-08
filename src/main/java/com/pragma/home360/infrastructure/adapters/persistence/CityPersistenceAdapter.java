@@ -30,7 +30,7 @@ public class CityPersistenceAdapter implements CityPersistencePort {
 
     @Override
     public List<CityModel> getCities(Integer page, Integer size, boolean orderAsc) {
-        Pageable pagination = PageRequest.of(page, size, Sort.by("name").ascending());
+        Pageable pagination = PageRequest.of(page, size, Sort.by("id").ascending());
         return cityRepository.findAllWithDepartment(pagination)
                 .stream()
                 .map(cityEntityMapper::entityToModel)

@@ -26,7 +26,7 @@ public class LocationUseCase implements LocationServicePort {
     @Override
     public void save(LocationModel locationModel, String cityName) {
         CityModel cityModel= cityPersistencePort.getByName(cityName);
-        locationModel.setCityId(cityModel.getId());
+        locationModel.setCity(cityModel);
         locationPersistencePort.save(locationModel);
     }
 

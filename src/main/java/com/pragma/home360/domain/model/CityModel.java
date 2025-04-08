@@ -11,13 +11,13 @@ public class CityModel {
     private DepartmentModel department;
 
     public CityModel() { }
-    public CityModel(Long id, String name, String description, DepartmentModel deparment) {
+    public CityModel(Long id, String name, String description, DepartmentModel department) {
         if (name.length() > 50) throw new NameMaxSizeExceededException();
         if (description.length() > 120) throw new DescriptionMaxSizeExceededException();
         this.id = id;
         this.name = name;
         this.description = description;
-        this.department = deparment;
+        this.department = department;
     }
 
     public Long getId() {

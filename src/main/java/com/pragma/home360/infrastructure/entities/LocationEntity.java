@@ -15,5 +15,7 @@ public class LocationEntity {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String barrio;
-    private Long cityId;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private CityEntity city;
 }
