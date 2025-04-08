@@ -1,11 +1,16 @@
 package com.pragma.home360.domain.model;
 
-public class DeparmentModel {
+import com.pragma.home360.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.pragma.home360.domain.exceptions.NameMaxSizeExceededException;
+
+public class DepartmentModel {
     private Long id;
     private String name;
     private String description;
 
-    public DeparmentModel(Long id, String name, String description) {
+    public DepartmentModel(Long id, String name, String description) {
+        if (name.length() > 50) throw new NameMaxSizeExceededException();
+        if (description.length() > 120) throw new DescriptionMaxSizeExceededException();
         this.id = id;
         this.name = name;
         this.description = description;

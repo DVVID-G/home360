@@ -17,11 +17,9 @@ import java.util.List;
 public interface LocationDtoMapper {
     @Mapping(target = "barrio", source = "barrio")
     @Mapping(target = "cityId", ignore = true)
-    @Mapping(target = "city", ignore = true)
     @Mapping(target = "id", ignore = true)
     LocationModel requestToModel(SaveLocationRequest saveLocationRequest);
     @Mapping(target = "barrio", source = "barrio")
-    @Mapping(target = "cityName", ignore = true) // Se asignará manualmente
     LocationResponse requestToResponse(LocationModel locationModel);
 
     List<LocationResponse> modelListToResponseList(List<LocationModel> locations);

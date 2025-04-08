@@ -7,14 +7,18 @@ import org.mapstruct.Mapping;
 
 
 import java.util.List;
-
-@Mapper(componentModel = "spring")
+@Mapper(
+        componentModel = "spring",
+        uses = DepartmentEntityMapper.class // Añade el mapper de Department
+)
 public interface CityEntityMapper {
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "description", target = "description")
+    @Mapping(source = "department.id", target = "department.id")
+    @Mapping(source = "department.name", target = "department.name")
+    @Mapping(source = "department.description", target = "department.description")
     CityEntity modelToEntity(CityModel cityModel);
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "description", target = "description")
+    @Mapping(source = "department.id", target = "department.id")
+    @Mapping(source = "department.name", target = "department.name")
+    @Mapping(source = "department.description", target = "department.description")
     CityModel entityToModel(CityEntity cityEntity);
     List<CityModel> entityListToModelList(List<CityEntity> cityEntities);
 }

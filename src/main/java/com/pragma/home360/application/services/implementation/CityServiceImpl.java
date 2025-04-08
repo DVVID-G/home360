@@ -27,7 +27,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public SaveCityResponse save(SaveCityRequest cityRequest) {
         var cityModel = cityDtoMapper.requestToModel(cityRequest);
-        cityUseCase.save(cityModel, cityRequest.deparmentName());
+        cityUseCase.save(cityModel, cityRequest.departmentName());
         return new SaveCityResponse(Constants.SAVE_CITY_RESPONSE_MESSAGE,
                 LocalDateTime.now());
     }

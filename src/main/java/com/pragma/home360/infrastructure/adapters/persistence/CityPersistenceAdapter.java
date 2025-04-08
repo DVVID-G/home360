@@ -1,7 +1,6 @@
 package com.pragma.home360.infrastructure.adapters.persistence;
 
 
-import com.pragma.commons.configurations.utils.Constants;
 import com.pragma.home360.domain.model.CityModel;
 import com.pragma.home360.domain.ports.out.CityPersistencePort;
 import com.pragma.home360.infrastructure.mappers.CityEntityMapper;
@@ -23,6 +22,7 @@ public class CityPersistenceAdapter implements CityPersistencePort {
     private final CityRepository cityRepository;
     private final CityEntityMapper cityEntityMapper;
 
+
     @Override
     public void save(CityModel cityModel) {
         cityRepository.save(cityEntityMapper.modelToEntity(cityModel));
@@ -30,15 +30,16 @@ public class CityPersistenceAdapter implements CityPersistencePort {
 
     @Override
     public List<CityModel> getCities(Integer page, Integer size, boolean orderAsc) {
-        Pageable pagination;
-        if (orderAsc) pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
-        else pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
-        return cityEntityMapper.entityListToModelList(cityRepository.findAll(pagination).getContent());
+        Pageable pagination = PageRequest.of(page, size, Sort.by("name").ascending());
+        return cityRepository.findAllWithDepartment(pagination)
+                .stream()
+                .map(cityEntityMapper::entityToModel)
+                .toList();
     }
 
     @Override
     public CityModel getByName(String name) {
-        return cityRepository.findByName(name) // Suponiendo que existe este método en CityRepository
+        return cityRepository.findByName(name)
                 .map(cityEntityMapper::entityToModel)
                 .orElseThrow(() -> new EntityNotFoundException("Ciudad no encontrada: " + name));
     }

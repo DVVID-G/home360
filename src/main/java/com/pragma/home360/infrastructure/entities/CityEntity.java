@@ -15,9 +15,10 @@ public class CityEntity {
     private Long id;
     private String name;
     private String description;
-    private Long deparmentId;
+    @ManyToOne(fetch = FetchType.LAZY) // Relación con Department
+    @JoinColumn(name = "department_id")
+    private DepartmentEntity department;
 }
-
 
 
 

@@ -2,6 +2,6 @@ package com.pragma.home360.application.dto.response;
 
 import java.time.LocalDateTime;
 
-public record SaveDeparmentResponse (String message, LocalDateTime time) {
+public record SaveDepartmentResponse(String message, LocalDateTime time) {
 
 }

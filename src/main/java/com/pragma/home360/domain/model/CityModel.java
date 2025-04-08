@@ -1,18 +1,23 @@
 package com.pragma.home360.domain.model;
 
 
+import com.pragma.home360.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.pragma.home360.domain.exceptions.NameMaxSizeExceededException;
+
 public class CityModel {
     private Long id;
     private String name;
     private String description;
-    private Long deparmentId;
+    private DepartmentModel department;
 
     public CityModel() { }
-    public CityModel(Long id, String name, String description, Long deparmentId) {
+    public CityModel(Long id, String name, String description, DepartmentModel deparment) {
+        if (name.length() > 50) throw new NameMaxSizeExceededException();
+        if (description.length() > 120) throw new DescriptionMaxSizeExceededException();
         this.id = id;
         this.name = name;
         this.description = description;
-        this.deparmentId = deparmentId;
+        this.department = deparment;
     }
 
     public Long getId() {
@@ -39,11 +44,11 @@ public class CityModel {
         this.description = description;
     }
 
-    public Long getDeparmentId() {
-        return deparmentId;
+    public DepartmentModel getDepartment() {
+        return department;
     }
 
-    public void setDeparmentId(Long deparmentId) {
-        this.deparmentId = deparmentId;
+    public void setDepartment(DepartmentModel department) {
+        this.department = department;
     }
 }
