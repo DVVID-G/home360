@@ -6,13 +6,12 @@ public class LocationModel {
     private Long id;
     private CityModel city;
     private String barrio;
-    private CityModel cityModel;
 
-    public LocationModel(Long id, CityModel city, String barrio, CityModel cityModel) {
+
+    public LocationModel(Long id, CityModel city, String barrio) {
         this.id = id;
         this.city = city;
         this.barrio = barrio;
-        this.cityModel = cityModel;
     }
 
     public Long getId() {
@@ -39,11 +38,4 @@ public class LocationModel {
         this.barrio = barrio;
     }
 
-    public CityModel getCityModel() {
-        return cityModel;
-    }
-
-    public void setCityModel(CityModel cityModel) {
-        this.cityModel = cityModel;
-    }
 }
