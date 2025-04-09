@@ -94,7 +94,7 @@ public class CategoryController {
     })
     @GetMapping("/")
     public ResponseEntity<Page<CategoryResponse>> getAllCategories(Pageable pageable) {
-        boolean orderAsc = true; // O extraer el orden del pageable
+        boolean orderAsc = true;
 
         return ResponseEntity.ok(categoryService.getCategories(pageable.getPageNumber(), pageable.getPageSize(), orderAsc));
     }
