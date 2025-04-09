@@ -3,7 +3,6 @@ package com.pragma.home360.application.mappers;
 import com.pragma.home360.application.dto.request.SaveDepartmentRequest;
 import com.pragma.home360.application.dto.response.DepartmentResponse;
 import com.pragma.home360.domain.model.DepartmentModel;
-import com.pragma.home360.infrastructure.entities.DepartmentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
