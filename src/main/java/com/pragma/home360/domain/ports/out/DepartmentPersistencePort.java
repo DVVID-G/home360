@@ -9,4 +9,5 @@ public interface DepartmentPersistencePort {
     void save(DepartmentModel departmentModel);
     List<DepartmentModel> getDepartments(Integer page, Integer size, boolean orderAsc);
     Optional<DepartmentModel> getByName(String departmentName);
+    boolean existsByName(String departmentName);
 }

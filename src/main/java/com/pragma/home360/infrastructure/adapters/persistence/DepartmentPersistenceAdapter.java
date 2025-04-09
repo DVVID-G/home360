@@ -43,4 +43,9 @@ public class DepartmentPersistenceAdapter implements DepartmentPersistencePort {
                 .map(departmentEntityMapper::entityToModel);
     }
 
+    @Override
+    public boolean existsByName(String name) {
+        return departmentRepository.existsByName(name);
+    }
+
 }

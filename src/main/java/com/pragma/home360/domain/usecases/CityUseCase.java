@@ -1,5 +1,6 @@
 package com.pragma.home360.domain.usecases;
 
+import com.pragma.home360.domain.exceptions.CityCannotBeNullException;
 import com.pragma.home360.domain.model.CityModel;
 import com.pragma.home360.domain.model.DepartmentModel;
 import com.pragma.home360.domain.ports.in.CityServicePort;
@@ -24,14 +25,20 @@ public class CityUseCase implements CityServicePort {
 
     @Override
     public void save(CityModel cityModel, String departmentName) {
-        // Busca el departamento usando el puerto, no el repositorio
-        DepartmentModel departmentModel = departmentPersistencePort.getByName(departmentName)
+        if (cityModel.getName() == null || cityModel.getName().isBlank()) {
+            throw new CityCannotBeNullException("El nombre de la ciudad no puede ser nulo");
+        }
+        if (cityModel.getDescription() == null || cityModel.getDescription().isBlank()) {
+            throw new CityCannotBeNullException("La descripcion de la ciudad no puede ser nula");
+        }
+
+        DepartmentModel departmentModel = departmentPersistencePort.getByName(departmentName)        // Busca el departamento usando el puerto
                 .orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
 
-        // Asigna el departamento al modelo
+
         cityModel.setDepartment(departmentModel);
 
-        // Guarda usando el puerto
+
         cityPersistencePort.save(cityModel);
     }
 

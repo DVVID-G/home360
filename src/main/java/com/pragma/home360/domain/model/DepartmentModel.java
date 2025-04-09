@@ -2,6 +2,9 @@ package com.pragma.home360.domain.model;
 
 import com.pragma.home360.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.pragma.home360.domain.exceptions.NameMaxSizeExceededException;
+import com.pragma.home360.domain.utils.constants.DomainConstants;
+
+import java.util.Objects;
 
 public class DepartmentModel {
     private Long id;
@@ -12,8 +15,8 @@ public class DepartmentModel {
         if (name.length() > 50) throw new NameMaxSizeExceededException();
         if (description.length() > 120) throw new DescriptionMaxSizeExceededException();
         this.id = id;
-        this.name = name;
-        this.description = description;
+        this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
+        this.description = Objects.requireNonNull(description, DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 
     public Long getId() {
@@ -29,7 +32,8 @@ public class DepartmentModel {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name.length() > 50) throw new NameMaxSizeExceededException();
+        this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
     }
 
     public String getDescription() {
@@ -37,6 +41,7 @@ public class DepartmentModel {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description.length() > 120) throw new DescriptionMaxSizeExceededException();
+        this.description = Objects.requireNonNull(description, DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 }
