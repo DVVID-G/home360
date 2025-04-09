@@ -20,6 +20,12 @@ public class CategoryUseCase implements CategoryServicePort {
     @Override
     public void save(CategoryModel categoryModel) {
         CategoryModel category = categoryPersistencePort.getCategoryByName(categoryModel.getName());
+        if (categoryModel.getName() == null || categoryModel.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la categoría es obligatorio");
+        }
+        if (categoryModel.getDescription() == null || categoryModel.getDescription().trim().isEmpty()) {
+            throw new IllegalArgumentException("La descripción de la categoría es obligatoria");
+        }
         if (category != null) {
             throw new CategoryAlreadyExistsException();
         }
