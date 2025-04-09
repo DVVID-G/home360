@@ -35,4 +35,10 @@ public class LocationUseCase implements LocationServicePort {
         return locationPersistencePort.getLocations(page, size, orderAsc);
     }
 
+    @Override
+    public List<LocationModel> searchLocations(String searchText) {
+        return locationPersistencePort.searchLocations(searchText);
+    }
+
+
 }

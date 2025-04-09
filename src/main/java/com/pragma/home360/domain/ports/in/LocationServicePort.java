@@ -7,4 +7,6 @@ import java.util.List;
 public interface LocationServicePort {
     void save (LocationModel locationModel, String cityName);
     List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc);
+    List<LocationModel> searchLocations(String searchText);
+
 }

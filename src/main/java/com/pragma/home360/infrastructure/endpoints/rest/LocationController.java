@@ -1,6 +1,7 @@
 package com.pragma.home360.infrastructure.endpoints.rest;
 
 import com.pragma.home360.application.dto.request.SaveLocationRequest;
+import com.pragma.home360.application.dto.response.LocationResponse;
 import com.pragma.home360.application.dto.response.SaveLocationResponse;
 import com.pragma.home360.application.services.LocationService;
 import com.pragma.home360.domain.model.LocationModel;
@@ -75,4 +76,10 @@ public class LocationController {
             @RequestParam(value = "orderAsc", defaultValue = "false") boolean orderAsc) {
         return ResponseEntity.ok(locationService.getLocations(page, size, orderAsc));
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<LocationResponse>> searchLocations(@RequestParam String searchText) {
+        return ResponseEntity.ok(locationService.searchLocations(searchText));
+    }
+
 }

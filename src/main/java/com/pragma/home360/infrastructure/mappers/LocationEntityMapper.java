@@ -13,5 +13,6 @@ public interface LocationEntityMapper {
     @Mapping(target = "id", source = "locationModel.id")
     LocationEntity modelToEntity(LocationModel locationModel);
     LocationModel entityToModel(LocationEntity locationEntity);
+    List<LocationModel> entityListToModelList(List<LocationEntity> locations);
 
 }

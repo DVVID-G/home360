@@ -7,4 +7,5 @@ import java.util.List;
 public interface LocationPersistencePort {
     void save(LocationModel locationModel);
     List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc);
+    List <LocationModel> searchLocations(String searchText);
 }

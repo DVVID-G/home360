@@ -2,6 +2,7 @@ package com.pragma.home360.application.services.implementation;
 
 import com.pragma.commons.configurations.utils.Constants;
 import com.pragma.home360.application.dto.request.SaveLocationRequest;
+import com.pragma.home360.application.dto.response.LocationResponse;
 import com.pragma.home360.application.dto.response.SaveLocationResponse;
 import com.pragma.home360.application.mappers.LocationDtoMapper;
 import com.pragma.home360.application.services.LocationService;
@@ -36,5 +37,9 @@ public class LocationServiceImpl implements LocationService {
         return locationServicePort.getLocations(page, size, orderAsc);
     }
 
+    @Override
+    public List<LocationResponse> searchLocations(String searchText) {
+        return locationDtoMapper.modelListToResponseList(locationUseCase.searchLocations(searchText));
+    }
 
 }

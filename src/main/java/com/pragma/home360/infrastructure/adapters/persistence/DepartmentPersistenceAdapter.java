@@ -48,4 +48,5 @@ public class DepartmentPersistenceAdapter implements DepartmentPersistencePort {
         return departmentRepository.existsByName(name);
     }
 
+
 }

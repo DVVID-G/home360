@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/category")
-@RequiredArgsConstructor // Inyección de dependencias por constructor
+@RequiredArgsConstructor
 @Tag(name = "Category", description = "Category API")
 public class CategoryController {
     private final CategoryService categoryService;
