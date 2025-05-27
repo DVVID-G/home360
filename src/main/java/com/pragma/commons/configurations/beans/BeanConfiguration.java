@@ -1,29 +1,12 @@
 package com.pragma.commons.configurations.beans;
 
-import com.pragma.home360.domain.ports.in.CategoryServicePort;
-import com.pragma.home360.domain.ports.in.CityServicePort;
-import com.pragma.home360.domain.ports.in.DepartmentServicePort;
-import com.pragma.home360.domain.ports.in.LocationServicePort;
-import com.pragma.home360.domain.ports.out.CategoryPersistencePort;
-import com.pragma.home360.domain.ports.out.CityPersistencePort;
-import com.pragma.home360.domain.ports.out.DepartmentPersistencePort;
-import com.pragma.home360.domain.ports.out.LocationPersistencePort;
-import com.pragma.home360.domain.usecases.CategoryUseCase;
-import com.pragma.home360.domain.usecases.CityUseCase;
-import com.pragma.home360.domain.usecases.DepartmentUsecase;
-import com.pragma.home360.domain.usecases.LocationUseCase;
-import com.pragma.home360.infrastructure.adapters.persistence.CategoryPersistenceAdapter;
-import com.pragma.home360.infrastructure.adapters.persistence.CityPersistenceAdapter;
-import com.pragma.home360.infrastructure.adapters.persistence.DepartmentPersistenceAdapter;
-import com.pragma.home360.infrastructure.adapters.persistence.LocationPersistenceAdapter;
-import com.pragma.home360.infrastructure.mappers.CategoryEntityMapper;
-import com.pragma.home360.infrastructure.mappers.CityEntityMapper;
-import com.pragma.home360.infrastructure.mappers.DepartmentEntityMapper;
-import com.pragma.home360.infrastructure.mappers.LocationEntityMapper;
-import com.pragma.home360.infrastructure.repositories.mysql.CategoryRepository;
-import com.pragma.home360.infrastructure.repositories.mysql.CityRepository;
-import com.pragma.home360.infrastructure.repositories.mysql.DepartmentRepository;
-import com.pragma.home360.infrastructure.repositories.mysql.LocationRepository;
+import com.pragma.home360.domain.ports.in.*;
+import com.pragma.home360.domain.ports.out.*;
+import com.pragma.home360.domain.usecases.*;
+import com.pragma.home360.infrastructure.adapters.persistence.*;
+import com.pragma.home360.infrastructure.adapters.security.PasswordEncoderAdapter;
+import com.pragma.home360.infrastructure.mappers.*;
+import com.pragma.home360.infrastructure.repositories.mysql.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +22,10 @@ public class BeanConfiguration {
     private final DepartmentEntityMapper departmentEntityMapper;
     private final CityRepository cityRepository;
     private final CityEntityMapper cityEntityMapper;
+    private final UserRepository userRepository;
+    private final UserEntityMapper userEntityMapper;
+    private final PasswordEncoderAdapter passwordEncoderAdapter;
+
 
 
     @Bean
@@ -74,6 +61,15 @@ public class BeanConfiguration {
     public LocationServicePort locationServicePort() {
         return new LocationUseCase(locationPersistencePort(), cityPersistencePort());
     }
+    @Bean
+    public UserPersistencePort userPersistencePort() {
+        return new UserPersistenceAdapter(userRepository, userEntityMapper);
+    }
+    @Bean
+    public UserServicePort userServicePort() {
+        return new UserUseCase(userPersistencePort(), passwordEncoderAdapter);
+    }
+
 
 
 
