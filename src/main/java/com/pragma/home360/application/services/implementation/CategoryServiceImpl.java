@@ -47,4 +47,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategoryByName(categoryName));
     }
 
+    @Override
+    public void deleteCategory(Long id) {
+        categoryServicePort.deleteCategory(id);
+    }
+
 }

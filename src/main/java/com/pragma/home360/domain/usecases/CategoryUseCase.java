@@ -41,4 +41,12 @@ public class CategoryUseCase implements CategoryServicePort {
     public List<CategoryModel> getCategoryByName(String categoryName) {
         return Collections.singletonList(categoryPersistencePort.getCategoryByName(categoryName));
     }
+
+    @Override
+    public void deleteCategory(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("El ID de la categoría es obligatorio y debe ser mayor que cero");
+        }
+        categoryPersistencePort.deleteCategory(id);
+    }
 }

@@ -98,6 +98,11 @@ public class CategoryController {
 
         return ResponseEntity.ok(categoryService.getCategories(pageable.getPageNumber(), pageable.getPageSize(), orderAsc));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 

@@ -13,8 +13,8 @@ import java.util.List;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CategoryDtoMapper {
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "description", target = "description")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "description", source = "description")
     CategoryModel requestToModel(SaveCategoryRequest saveCategoryRequest);
     CategoryResponse modelToResponse(CategoryModel categoryModel);
     List<CategoryResponse> modelListToResponseList(List<CategoryModel> categories);

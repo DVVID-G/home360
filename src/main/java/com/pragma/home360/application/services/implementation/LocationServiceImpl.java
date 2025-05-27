@@ -9,7 +9,13 @@ import com.pragma.home360.application.services.LocationService;
 import com.pragma.home360.domain.model.LocationModel;
 import com.pragma.home360.domain.ports.in.LocationServicePort;
 import com.pragma.home360.domain.usecases.LocationUseCase;
+import com.pragma.home360.infrastructure.entities.LocationEntity;
+import com.pragma.home360.infrastructure.repositories.mysql.LocationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +28,7 @@ public class LocationServiceImpl implements LocationService {
     private final LocationServicePort locationServicePort;
     private final LocationDtoMapper locationDtoMapper;
     private final LocationUseCase locationUseCase;
+    private final LocationRepository locationRepository;
 
 
     @Override
@@ -33,8 +40,11 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc) {
-        return locationServicePort.getLocations(page, size, orderAsc);
+    public Page<LocationResponse> getLocations(Integer page, Integer size, boolean orderAsc) {
+        Sort sort = Sort.by(orderAsc ? Sort.Direction.ASC : Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<LocationEntity> pageEntities = locationRepository.findAll(pageable);
+        return pageEntities.map(locationDtoMapper::entityToResponse);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.pragma.home360.domain.ports.in;
 
 import com.pragma.home360.domain.model.LocationModel;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 

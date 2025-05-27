@@ -38,4 +38,12 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
         else pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
         return categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
     }
+
+    @Override
+    public void deleteCategory(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("El ID de la categoría es obligatorio y debe ser mayor que cero");
+        }
+        categoryRepository.deleteById(id);
+    }
 }

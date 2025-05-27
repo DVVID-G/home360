@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,11 +72,10 @@ public class LocationController {
     })
 
     @GetMapping("/")
-    public ResponseEntity<List<LocationModel>> getLocations(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "15") Integer size,
-            @RequestParam(value = "orderAsc", defaultValue = "false") boolean orderAsc) {
-        return ResponseEntity.ok(locationService.getLocations(page, size, orderAsc));
+    public ResponseEntity<Page<LocationResponse>> getLocations(Pageable pageable) {
+
+
+        return ResponseEntity.ok(locationService.getLocations(pageable.getPageNumber(), pageable.getPageSize(), pageable.isPaged()));
     }
 
     @GetMapping("/search")

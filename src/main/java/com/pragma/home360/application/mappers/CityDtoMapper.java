@@ -13,17 +13,14 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CityDtoMapper {
-    @Mapping(source = "cityName", target = "name")
-    @Mapping(source = "cityDescription", target = "description")
+    @Mapping(target = "name", source = "cityName")
+    @Mapping(target = "description", source = "cityDescription")
     CityModel requestToModel(SaveCityRequest saveCityRequest);
+    @Mapping(target = "cityName", source = "name")
+    @Mapping(target = "cityDescription", source = "description")
+    @Mapping(target = "departmentModel", source = "department")
 
-    // Corregir los nombres de las propiedades para CityResponse
-    @Mapping(source = "name", target = "cityName")
-    @Mapping(source = "description", target = "cityDescription")
-    @Mapping(source = "department", target = "departmentModel")
     CityResponse modelToResponse(CityModel cityModel);
 
-    @Mapping(source = "name", target = "cityName")
-    @Mapping(source = "description", target = "cityDescription")
     List<CityResponse> modelListToResponseList(List<CityModel> cities);
 }

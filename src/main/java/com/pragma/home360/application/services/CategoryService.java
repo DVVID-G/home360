@@ -11,4 +11,5 @@ public interface CategoryService {
     SaveCategoryResponse save(SaveCategoryRequest request);
     Page<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc);
     List<CategoryResponse> getCategoryByName(String categoryName);
+    void deleteCategory(Long id);
 }
