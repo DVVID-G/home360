@@ -8,6 +8,7 @@ import com.pragma.home360.domain.model.LocationModel;
 import com.pragma.home360.domain.ports.in.LocationServicePort;
 import com.pragma.home360.domain.ports.out.CityPersistencePort;
 import com.pragma.home360.domain.ports.out.LocationPersistencePort;
+import org.springframework.data.domain.Page;
 
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class LocationUseCase implements LocationServicePort {
     public List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc) {
         return locationPersistencePort.getLocations(page, size, orderAsc);
     }
+
+    @Override
+    public List<LocationModel> searchLocations(String searchText) {
+        return locationPersistencePort.searchLocations(searchText);
+    }
+
 
 }

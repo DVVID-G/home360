@@ -1,12 +1,12 @@
 package com.pragma.home360.infrastructure.adapters.persistence;
 
-import com.pragma.commons.configurations.utils.Constants;
-import com.pragma.home360.domain.model.CityModel;
+
 import com.pragma.home360.domain.model.LocationModel;
 import com.pragma.home360.domain.ports.out.LocationPersistencePort;
 import com.pragma.home360.infrastructure.mappers.LocationEntityMapper;
 import com.pragma.home360.infrastructure.repositories.mysql.LocationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,6 +22,7 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     private final LocationRepository locationRepository;
     private final LocationEntityMapper locationEntityMapper;
 
+
     @Override
     public void save(LocationModel locationModel) {
         locationRepository.save(locationEntityMapper.modelToEntity(locationModel));
@@ -36,4 +37,13 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
                 .toList();
     }
 
+    @Override
+    public List<LocationModel> searchLocations(String searchText) {
+        return locationRepository.searchLocations(searchText)
+                .stream()
+                .map(locationEntityMapper::entityToModel)
+                .toList();
+    }
 }
+
+

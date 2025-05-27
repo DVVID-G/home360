@@ -1,6 +1,7 @@
 package com.pragma.home360.infrastructure.endpoints.rest;
 
 import com.pragma.home360.application.dto.request.SaveLocationRequest;
+import com.pragma.home360.application.dto.response.LocationResponse;
 import com.pragma.home360.application.dto.response.SaveLocationResponse;
 import com.pragma.home360.application.services.LocationService;
 import com.pragma.home360.domain.model.LocationModel;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,10 +72,15 @@ public class LocationController {
     })
 
     @GetMapping("/")
-    public ResponseEntity<List<LocationModel>> getLocations(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "15") Integer size,
-            @RequestParam(value = "orderAsc", defaultValue = "false") boolean orderAsc) {
-        return ResponseEntity.ok(locationService.getLocations(page, size, orderAsc));
+    public ResponseEntity<Page<LocationResponse>> getLocations(Pageable pageable) {
+
+
+        return ResponseEntity.ok(locationService.getLocations(pageable.getPageNumber(), pageable.getPageSize(), pageable.isPaged()));
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<LocationResponse>> searchLocations(@RequestParam String searchText) {
+        return ResponseEntity.ok(locationService.searchLocations(searchText));
+    }
+
 }

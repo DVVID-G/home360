@@ -11,13 +11,12 @@ import java.util.List;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface DepartmentDtoMapper {
-    @Mapping(source = "departmentName", target = "name")
-    @Mapping(source = "departmentDescription", target = "description")
-    DepartmentModel requestToModel(SaveDepartmentRequest saveDepartmentRequest);
+    @Mapping(target = "name", source = "departmentName")
+    @Mapping(target = "description", source = "departmentDescription")
 
-    // Mapeo del modelo a la respuesta: convierte "name" a "cityName" y "description" a "cityDescription"
-    @Mapping(source = "name", target = "departmentName")
-    @Mapping(source = "description", target = "departmentDescription")
+    DepartmentModel requestToModel(SaveDepartmentRequest saveDepartmentRequest);
+    @Mapping(target = "departmentName", source = "name")
+    @Mapping(target = "departmentDescription", source = "description")
     DepartmentResponse requestToResponse(DepartmentModel departmentModel);
 
     List<DepartmentResponse> modelListToResponseList(List<DepartmentModel> deparments);

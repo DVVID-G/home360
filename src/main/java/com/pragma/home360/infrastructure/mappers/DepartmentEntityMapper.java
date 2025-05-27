@@ -9,13 +9,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DepartmentEntityMapper {
-    @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "description", source = "description")
     DepartmentEntity modelToEntity(DepartmentModel departmentModel);
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "description", source = "description")
     DepartmentModel entityToModel(DepartmentEntity departmentEntity);
     List<DepartmentModel> entityListToModelList(List<DepartmentEntity> departmentEntities);
 }
