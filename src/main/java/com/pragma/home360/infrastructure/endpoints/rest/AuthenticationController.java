@@ -2,7 +2,7 @@ package com.pragma.home360.infrastructure.endpoints.rest;
 
 import com.pragma.home360.application.dto.request.AuthenticationRequest;
 import com.pragma.home360.application.dto.response.AuthenticationResponse;
-import com.pragma.home360.infrastructure.security.AuthenticationService;
+import com.pragma.home360.application.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

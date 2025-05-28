@@ -69,6 +69,10 @@ public class BeanConfiguration {
     public UserServicePort userServicePort() {
         return new UserUseCase(userPersistencePort(), passwordEncoderAdapter);
     }
+    @Bean
+    public AuthenticationServicePort authenticationServicePort(AuthenticationPersistencePort authenticationPersistencePort) {
+        return new AuthenticationUseCase(authenticationPersistencePort);
+    }
 
 
 
