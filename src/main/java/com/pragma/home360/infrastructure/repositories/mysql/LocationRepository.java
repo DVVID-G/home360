@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
@@ -21,6 +22,6 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Long> 
        WHERE c.name LIKE %:query% OR d.name LIKE %:query%
        """)
     List<LocationEntity> searchLocations(@Param("query") String searchText);
-
-
+    @Query("SELECT l FROM LocationEntity l JOIN FETCH l.city WHERE l.barrio = :locationName")
+    Optional<LocationEntity> findByBarrio(@Param("locationName") String locationName);
 }

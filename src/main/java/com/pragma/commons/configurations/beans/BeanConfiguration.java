@@ -25,6 +25,8 @@ public class BeanConfiguration {
     private final UserRepository userRepository;
     private final UserEntityMapper userEntityMapper;
     private final PasswordEncoderAdapter passwordEncoderAdapter;
+    private final HouseRepository houseRepository;
+    private final HouseEntityMapper houseEntityMapper;
 
 
 
@@ -69,12 +71,20 @@ public class BeanConfiguration {
     public UserServicePort userServicePort() {
         return new UserUseCase(userPersistencePort(), passwordEncoderAdapter);
     }
+
     @Bean
     public AuthenticationServicePort authenticationServicePort(AuthenticationPersistencePort authenticationPersistencePort) {
         return new AuthenticationUseCase(authenticationPersistencePort);
     }
+    @Bean
+    public HouseServicePort houseServicePort() {
+        return new HouseUseCase(housePersistencePort(), categoryPersistencePort(), locationPersistencePort());
+    }
 
-
+    @Bean
+    public HousePersistencePort housePersistencePort() {
+        return new HousePersistenceAdapter(houseRepository, houseEntityMapper);
+    }
 
 
 }

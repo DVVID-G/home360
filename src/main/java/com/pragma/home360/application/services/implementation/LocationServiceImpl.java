@@ -12,10 +12,7 @@ import com.pragma.home360.domain.usecases.LocationUseCase;
 import com.pragma.home360.infrastructure.entities.LocationEntity;
 import com.pragma.home360.infrastructure.repositories.mysql.LocationRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,29 +24,28 @@ import java.util.List;
 public class LocationServiceImpl implements LocationService {
     private final LocationServicePort locationServicePort;
     private final LocationDtoMapper locationDtoMapper;
-    private final LocationUseCase locationUseCase;
-    private final LocationRepository locationRepository;
+
 
 
     @Override
     public SaveLocationResponse save(SaveLocationRequest locationRequest) {
-        var locationModel = locationDtoMapper.requestToModel(locationRequest);
-        locationUseCase.save(locationModel, locationRequest.cityName());
-        return new SaveLocationResponse(Constants.SAVE_CITY_RESPONSE_MESSAGE,
-                LocalDateTime.now());
+        locationServicePort.save(locationDtoMapper.requestToModel(locationRequest), locationRequest.cityName());
+        return new SaveLocationResponse(Constants.SAVE_LOCATION_RESPONSE_MESSAGE, LocalDateTime.now());
+
     }
 
     @Override
     public Page<LocationResponse> getLocations(Integer page, Integer size, boolean orderAsc) {
-        Sort sort = Sort.by(orderAsc ? Sort.Direction.ASC : Sort.Direction.DESC, "id");
-        Pageable pageable = PageRequest.of(page, size, sort);
-        Page<LocationEntity> pageEntities = locationRepository.findAll(pageable);
-        return pageEntities.map(locationDtoMapper::entityToResponse);
+        List<LocationModel> locations = locationServicePort.getLocations(page, size, orderAsc);
+        List<LocationResponse> locationResponses = locationDtoMapper.modelListToResponseList(locations);
+        return new PageImpl<>(locationResponses, PageRequest.of(page, size, Sort.by(orderAsc ? Sort.Direction.ASC : Sort.Direction.DESC, "id")), locations.size());
+
     }
 
     @Override
     public List<LocationResponse> searchLocations(String searchText) {
-        return locationDtoMapper.modelListToResponseList(locationUseCase.searchLocations(searchText));
+        return locationDtoMapper.modelListToResponseList(
+                locationServicePort.searchLocations(searchText));
     }
 
 }
