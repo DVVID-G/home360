@@ -1,5 +1,6 @@
 package com.pragma.home360.application.services.implementation;
 
+import com.pragma.commons.configurations.utils.Constants;
 import com.pragma.home360.application.dto.request.SaveHouseRequest;
 import com.pragma.home360.application.dto.response.HouseResponse;
 import com.pragma.home360.application.dto.response.SaveHouseResponse;
@@ -29,8 +30,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public SaveHouseResponse save(SaveHouseRequest houseRequest) {
-        HouseModel houseModel = houseDtoMapper.requestToModel(houseRequest);
-        houseServicePort.save(houseModel);
+        houseServicePort.save(houseDtoMapper.requestToModel(houseRequest));
         return new SaveHouseResponse(Constants.SAVE_HOUSE_RESPONSE_MESSAGE, LocalDateTime.now());
     }
 
