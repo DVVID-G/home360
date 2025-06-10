@@ -30,7 +30,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public SaveHouseResponse save(SaveHouseRequest houseRequest) {
-        houseServicePort.save(houseDtoMapper.requestToModel(houseRequest));
+        HouseModel houseModel = houseDtoMapper.requestToModel(houseRequest);
+        houseServicePort.save(houseModel, houseRequest.categoryName(), houseRequest.locationName(), houseRequest.status());
         return new SaveHouseResponse(Constants.SAVE_HOUSE_RESPONSE_MESSAGE, LocalDateTime.now());
     }
 

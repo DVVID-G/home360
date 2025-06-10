@@ -15,6 +15,9 @@ public class HouseModel {
     private PublicationStatusModel publicationStatus;
     private LocalDateTime createdAt;
 
+    public HouseModel() {
+    }
+
     public HouseModel(Long id, String name, String description, CategoryModel category, Integer numberOfRooms, Integer numberOfBathrooms, Double price, LocationModel location, LocalDateTime publishDate, PublicationStatusModel publicationStatus, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;

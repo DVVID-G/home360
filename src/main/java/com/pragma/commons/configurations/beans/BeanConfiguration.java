@@ -78,7 +78,7 @@ public class BeanConfiguration {
     }
     @Bean
     public HouseServicePort houseServicePort() {
-        return new HouseUseCase(housePersistencePort());
+        return new HouseUseCase(housePersistencePort(), categoryPersistencePort(), locationPersistencePort());
     }
 
     @Bean

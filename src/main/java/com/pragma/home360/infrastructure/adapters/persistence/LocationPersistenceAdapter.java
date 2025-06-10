@@ -29,6 +29,13 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     }
 
     @Override
+    public LocationModel getLocationByName(String locationName) {
+        return locationRepository.findByBarrio(locationName)
+                .map(locationEntityMapper::entityToModel)
+                .orElseThrow(() -> new RuntimeException("Location not found with name: " + locationName));
+    }
+
+    @Override
     public List<LocationModel> getLocations(Integer page, Integer size, boolean orderAsc) {
         Pageable pagination = PageRequest.of(page, size, Sort.by("id").ascending());
         return locationRepository.findAllWithCity(pagination)
@@ -44,6 +51,8 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
                 .map(locationEntityMapper::entityToModel)
                 .toList();
     }
+
+
 }
 
 
