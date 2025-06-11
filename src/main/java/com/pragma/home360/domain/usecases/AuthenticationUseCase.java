@@ -1,5 +1,7 @@
 package com.pragma.home360.domain.usecases;
 
+import com.pragma.home360.domain.exceptions.InvalidCredentialsException;
+import com.pragma.home360.domain.exceptions.InvalidTokenException;
 import com.pragma.home360.domain.model.AuthenticationModel;
 import com.pragma.home360.domain.ports.in.AuthenticationServicePort;
 import com.pragma.home360.domain.ports.out.AuthenticationPersistencePort;
@@ -15,7 +17,7 @@ public class AuthenticationUseCase implements AuthenticationServicePort {
     @Override
     public AuthenticationModel authenticate(AuthenticationModel authenticationModel) {
         if (!authenticationPersistencePort.validateCredentials(authenticationModel)) {
-            throw new RuntimeException("Credenciales inválidas");
+            throw new InvalidCredentialsException("Credenciales inválidas");
         }
 
         String token = authenticationPersistencePort.generateToken(authenticationModel.getEmail());
@@ -40,7 +42,7 @@ public class AuthenticationUseCase implements AuthenticationServicePort {
     @Override
     public AuthenticationModel getAuthenticatedUser(String token) {
         if (!validateToken(token)) {
-            throw new RuntimeException("Token inválido");
+            throw new InvalidTokenException("Token inválido");
         }
 
         String email = authenticationPersistencePort.getEmailFromToken(token);
@@ -53,7 +55,7 @@ public class AuthenticationUseCase implements AuthenticationServicePort {
     @Override
     public String refreshToken(String token) {
         if (!validateToken(token)) {
-            throw new RuntimeException("Token inválido");
+            throw new InvalidTokenException("Token inválido");
         }
 
         String email = authenticationPersistencePort.getEmailFromToken(token);
