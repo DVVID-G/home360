@@ -4,15 +4,13 @@ import com.pragma.home360.domain.exceptions.CategoryNotFoundException;
 import com.pragma.home360.domain.exceptions.InvalidStatusException;
 import com.pragma.home360.domain.exceptions.LocationNotFoundException;
 import com.pragma.home360.domain.exceptions.MissingRequiredFieldException;
-import com.pragma.home360.domain.model.CategoryModel;
-import com.pragma.home360.domain.model.HouseModel;
-import com.pragma.home360.domain.model.LocationModel;
-import com.pragma.home360.domain.model.PublicationStatusModel;
+import com.pragma.home360.domain.model.*;
 import com.pragma.home360.domain.ports.in.HouseServicePort;
 import com.pragma.home360.domain.ports.out.CategoryPersistencePort;
 import com.pragma.home360.domain.ports.out.HousePersistencePort;
 import com.pragma.home360.domain.ports.out.LocationPersistencePort;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -56,6 +54,84 @@ public class HouseUseCase implements HouseServicePort {
 
         housePersistencePort.save(houseModel);
     }
+
+    @Override
+    public PaginatedResult<HouseModel> getHousesWithFilters(Integer page, Integer size, HouseSearchFilters filters) {
+        // ✅ TODAS las validaciones en Domain
+        validatePaginationParameters(page, size);
+        validateSearchFilters(filters);
+
+        // ✅ Domain genera la fecha actual (lógica de negocio)
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        // ✅ Solo delegación a Infrastructure
+        return housePersistencePort.getHousesWithFilters(page, size, filters, currentDate);
+    }
+
+    // ✅ Validaciones de dominio
+    private void validateSearchFilters(HouseSearchFilters filters) {
+        if (filters.getSortBy() != null) {
+            List<String> validSortFields = List.of("id","location", "category", "rooms", "bathrooms", "price");
+            if (!validSortFields.contains(filters.getSortBy().toLowerCase())) {
+                throw new IllegalArgumentException("SortBy inválido. Valores permitidos: " + validSortFields);
+            }
+        }
+
+        if (filters.getSortDirection() != null) {
+            List<String> validDirections = List.of("asc", "desc");
+            if (!validDirections.contains(filters.getSortDirection().toLowerCase())) {
+                throw new IllegalArgumentException("SortDirection inválido. Valores permitidos: " + validDirections);
+            }
+        }
+
+        validatePriceRange(filters.getMinPrice(), filters.getMaxPrice());
+        validateRoomRange(filters.getMinRooms(), filters.getMaxRooms());
+        validateBathroomRange(filters.getMinBathrooms(), filters.getMaxBathrooms());
+    }
+    private void validatePaginationParameters(Integer page, Integer size) {
+        if (page < 0) {
+            throw new IllegalArgumentException("Page debe ser mayor o igual a 0");
+        }
+        if (size <= 0 || size > 100) {
+            throw new IllegalArgumentException("Size debe estar entre 1 y 100");
+        }
+    }
+    private void validatePriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+        if (minPrice != null && minPrice.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Precio mínimo debe ser mayor o igual a 0");
+        }
+        if (maxPrice != null && maxPrice.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Precio máximo debe ser mayor o igual a 0");
+        }
+        if (minPrice != null && maxPrice != null && minPrice.compareTo(maxPrice) > 0) {
+            throw new IllegalArgumentException("Precio mínimo no puede ser mayor al precio máximo");
+        }
+    }
+
+    private void validateRoomRange(Integer minRooms, Integer maxRooms) {
+        if (minRooms != null && minRooms < 0) {
+            throw new IllegalArgumentException("Número mínimo de cuartos debe ser mayor o igual a 0");
+        }
+        if (maxRooms != null && maxRooms < 0) {
+            throw new IllegalArgumentException("Número máximo de cuartos debe ser mayor o igual a 0");
+        }
+        if (minRooms != null && maxRooms != null && minRooms > maxRooms) {
+            throw new IllegalArgumentException("Número mínimo de cuartos no puede ser mayor al máximo");
+        }
+    }
+
+    private void validateBathroomRange(Integer minBathrooms, Integer maxBathrooms) {
+        if (minBathrooms != null && minBathrooms < 0) {
+            throw new IllegalArgumentException("Número mínimo de baños debe ser mayor o igual a 0");
+        }
+        if (maxBathrooms != null && maxBathrooms < 0) {
+            throw new IllegalArgumentException("Número máximo de baños debe ser mayor o igual a 0");
+        }
+        if (minBathrooms != null && maxBathrooms != null && minBathrooms > maxBathrooms) {
+            throw new IllegalArgumentException("Número mínimo de baños no puede ser mayor al máximo");
+        }
+    }
+
 
     private void validateHouseModel(HouseModel houseModel) {
         if (houseModel.getName() == null || houseModel.getName().trim().isEmpty()) {
