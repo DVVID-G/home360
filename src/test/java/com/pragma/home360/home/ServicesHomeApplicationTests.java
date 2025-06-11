@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ServicesHomeApplicationTests {
 
     @Test
-    void contextLoads() {
+    void contextLoads() { // This test will pass if the application context loads successfully
+        // No additional assertions are needed here
     }
 
 }

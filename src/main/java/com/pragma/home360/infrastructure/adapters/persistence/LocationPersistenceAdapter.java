@@ -6,7 +6,6 @@ import com.pragma.home360.domain.ports.out.LocationPersistencePort;
 import com.pragma.home360.infrastructure.mappers.LocationEntityMapper;
 import com.pragma.home360.infrastructure.repositories.mysql.LocationRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

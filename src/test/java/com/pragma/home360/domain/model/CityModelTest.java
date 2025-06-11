@@ -98,7 +98,5 @@ class CityModelTest {
         assertEquals(expectedDepartment, actualDepartment);
     }
 
-    @Test
-    void setDepartment() {
-    }
+
 }
