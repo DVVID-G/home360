@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import com.pragma.home360.application.dto.response.CategoryResponse;
 import com.pragma.home360.application.dto.response.SaveCategoryResponse;
 import com.pragma.home360.application.services.CategoryService;
-import com.pragma.home360.infrastructure.configurations.utils.Constants;
+import com.pragma.commons.configurations.utils.Constants;
 import com.pragma.home360.domain.ports.in.CategoryServicePort;
 import com.pragma.home360.application.dto.request.SaveCategoryRequest;
 import com.pragma.home360.application.mappers.CategoryDtoMapper;

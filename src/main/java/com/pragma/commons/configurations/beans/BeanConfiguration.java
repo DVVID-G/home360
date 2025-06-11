@@ -1,8 +1,14 @@
 package com.pragma.commons.configurations.beans;
 
+import com.pragma.home360.domain.usecases.CategoryUseCase;
 import com.pragma.home360.domain.ports.in.*;
 import com.pragma.home360.domain.ports.out.*;
-import com.pragma.home360.domain.usecases.*;
+import com.pragma.home360.domain.usecases.AuthenticationUseCase;
+import com.pragma.home360.domain.usecases.CityUseCase;
+import com.pragma.home360.domain.usecases.DepartmentUsecase;
+import com.pragma.home360.domain.usecases.HouseUseCase;
+import com.pragma.home360.domain.usecases.LocationUseCase;
+import com.pragma.home360.domain.usecases.UserUseCase;
 import com.pragma.home360.infrastructure.adapters.persistence.*;
 import com.pragma.home360.infrastructure.adapters.security.PasswordEncoderAdapter;
 import com.pragma.home360.infrastructure.mappers.*;

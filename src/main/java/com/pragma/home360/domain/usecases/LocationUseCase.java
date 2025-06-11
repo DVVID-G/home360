@@ -8,7 +8,6 @@ import com.pragma.home360.domain.model.LocationModel;
 import com.pragma.home360.domain.ports.in.LocationServicePort;
 import com.pragma.home360.domain.ports.out.CityPersistencePort;
 import com.pragma.home360.domain.ports.out.LocationPersistencePort;
-import org.springframework.data.domain.Page;
 
 
 import java.util.List;

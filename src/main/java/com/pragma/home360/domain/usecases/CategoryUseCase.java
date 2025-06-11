@@ -1,4 +1,4 @@
-package com.pragma.home360.application.usecases;
+package com.pragma.home360.domain.usecases;
 
 
 

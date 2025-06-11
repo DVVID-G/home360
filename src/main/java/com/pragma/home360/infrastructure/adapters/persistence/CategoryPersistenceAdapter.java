@@ -1,7 +1,7 @@
 package com.pragma.home360.infrastructure.adapters.persistence;
 
 import com.pragma.home360.domain.model.CategoryModel;
-import com.pragma.home360.infrastructure.configurations.utils.Constants;
+import com.pragma.commons.configurations.utils.Constants;
 import com.pragma.home360.domain.ports.out.CategoryPersistencePort;
 import com.pragma.home360.infrastructure.mappers.CategoryEntityMapper;
 import com.pragma.home360.infrastructure.repositories.mysql.CategoryRepository;
