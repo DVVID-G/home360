@@ -5,6 +5,7 @@ import com.pragma.home360.application.dto.request.SaveHouseRequest;
 import com.pragma.home360.application.dto.response.HouseResponse;
 import com.pragma.home360.application.dto.response.SaveHouseResponse;
 import com.pragma.home360.application.services.HouseService;
+import com.pragma.home360.infrastructure.constants.ApiConstants;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/house")
+@RequestMapping(ApiConstants.HOUSE_BASE)
 @RequiredArgsConstructor
 @Tag(name = "House", description = "House API")
 public class HouseController {

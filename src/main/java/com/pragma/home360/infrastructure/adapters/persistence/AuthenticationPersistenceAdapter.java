@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 @Slf4j
 public class AuthenticationPersistenceAdapter implements AuthenticationPersistencePort {
@@ -54,6 +53,7 @@ public class AuthenticationPersistenceAdapter implements AuthenticationPersisten
     }
 
     @Override
+    @Transactional
     public void invalidateTokens(String email) {
         // En JWT stateless no necesitamos invalidar tokens
     }

@@ -4,6 +4,7 @@ import com.pragma.home360.application.dto.request.SaveCityRequest;
 import com.pragma.home360.application.dto.response.CityResponse;
 import com.pragma.home360.application.dto.response.SaveCityResponse;
 import com.pragma.home360.application.services.CityService;
+import com.pragma.home360.infrastructure.constants.ApiConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/City")
+@RequestMapping(ApiConstants.CITY_BASE)
 @RequiredArgsConstructor
 
 public class CityController {

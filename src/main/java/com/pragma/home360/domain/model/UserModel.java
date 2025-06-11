@@ -2,6 +2,7 @@ package com.pragma.home360.domain.model;
 
 import com.pragma.home360.domain.exceptions.*;
 
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -14,9 +15,9 @@ public class UserModel {
     private LocalDate dateOfBirth;
     private String email;
     private String password;
-    private String role;
+    private RoleModel role;
 
-    public UserModel(Long userId, String userIdentification, String firstName, String lastName, String phoneNumber, LocalDate dateOfBirth, String email, String password, String role) {
+    public UserModel(Long userId, String userIdentification, String firstName, String lastName, String phoneNumber, LocalDate dateOfBirth, String email, String password, RoleModel role) {
         if (firstName == null || firstName.isBlank()) {
             throw new RequiredFieldException("El nombre es obligatorio");
         }
@@ -61,11 +62,12 @@ public class UserModel {
         }
 
         if (role == null ||
-                !(role.equals("VENDEDOR")
-                        || role.equals("ADMINISTRADOR")
-                        || role.equals("CLIENTE"))) {
+                !(role == RoleModel.VENDEDOR
+                        || role == RoleModel.ADMIN
+                        || role == RoleModel.COMPRADOR)) {
             throw new IllegalArgumentException("Invalid role");
         }
+
 
         this.userId = userId;
         this.userIdentification = userIdentification;
@@ -110,7 +112,7 @@ public class UserModel {
         this.password = password;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleModel role) {
         this.role = role;
     }
 
@@ -146,7 +148,7 @@ public class UserModel {
         return password;
     }
 
-    public String getRole() {
+    public RoleModel getRole() {
         return role;
     }
 }
