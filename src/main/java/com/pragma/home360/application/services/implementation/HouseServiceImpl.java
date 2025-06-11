@@ -1,20 +1,20 @@
 package com.pragma.home360.application.services.implementation;
 
 import com.pragma.commons.configurations.utils.Constants;
+import com.pragma.home360.application.dto.request.HouseSearchRequest;
 import com.pragma.home360.application.dto.request.SaveHouseRequest;
 import com.pragma.home360.application.dto.response.HouseResponse;
 import com.pragma.home360.application.dto.response.SaveHouseResponse;
 import com.pragma.home360.application.mappers.HouseDtoMapper;
 import com.pragma.home360.application.services.HouseService;
 import com.pragma.home360.domain.model.HouseModel;
+import com.pragma.home360.domain.model.HouseSearchFilters;
+import com.pragma.home360.domain.model.PaginatedResult;
 import com.pragma.home360.domain.ports.in.HouseServicePort;
 import com.pragma.home360.infrastructure.entities.HouseEntity;
 import com.pragma.home360.infrastructure.repositories.mysql.HouseRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -42,9 +42,31 @@ public class HouseServiceImpl implements HouseService {
         Page<HouseEntity> pageEntities = houseRepository.findAll(pageable);
         return pageEntities.map(houseDtoMapper::entityToResponse).getContent();
     }
+    @Override
+    public Page<HouseResponse> searchHouses(Integer page, Integer size, HouseSearchRequest searchRequest) {
+        // ✅ Convertir DTO a modelo de dominio
+        HouseSearchFilters filters = new HouseSearchFilters(
+                searchRequest.location(), searchRequest.category(),
+                searchRequest.minRooms(), searchRequest.maxRooms(),
+                searchRequest.minBathrooms(), searchRequest.maxBathrooms(),
+                searchRequest.minPrice(), searchRequest.maxPrice(),
+                searchRequest.sortBy(), searchRequest.sortDirection()
+        );
+
+        // ✅ Usar dominio
+        PaginatedResult<HouseModel> result = houseServicePort.getHousesWithFilters(page, size, filters);
+
+        // ✅ Convertir resultado de dominio a Spring Page (para el Controller)
+        List<HouseResponse> responses = houseDtoMapper.modelListToResponseList(result.getContent());
+
+        return new PageImpl<>(
+                responses,
+                PageRequest.of(page, size),
+                result.getTotalElements()
+        );
 
 
-}
+    }}
 
 
 
