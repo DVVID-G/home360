@@ -1,5 +1,11 @@
 package com.pragma.home360.application.services.implementation;
 
+import com.pragma.home360.infrastructure.entities.CategoryEntity;
+import com.pragma.home360.infrastructure.repositories.mysql.CategoryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import com.pragma.home360.application.dto.response.CategoryResponse;
@@ -20,6 +26,7 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryServicePort categoryServicePort;
     private final CategoryDtoMapper categoryDtoMapper;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public SaveCategoryResponse save(SaveCategoryRequest request) {
@@ -28,8 +35,21 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc) {
-        return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategories(page, size, orderAsc));
+    public Page<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<CategoryEntity> pageEntities = categoryRepository.findAll(pageable);
+        return pageEntities.map(categoryDtoMapper::entityToResponse);
+    }
+
+    @Override
+    public List<CategoryResponse> getCategoryByName(String categoryName) {
+        return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategoryByName(categoryName));
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        categoryServicePort.deleteCategory(id);
     }
 
 }
