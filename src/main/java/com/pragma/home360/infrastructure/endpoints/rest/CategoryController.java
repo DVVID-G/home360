@@ -5,6 +5,7 @@ import com.pragma.home360.application.dto.response.CategoryResponse;
 import com.pragma.home360.application.dto.response.SaveCategoryResponse;
 import com.pragma.home360.application.services.CategoryService;
 
+import com.pragma.home360.infrastructure.constants.ApiConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +25,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/category")
+@RequestMapping(ApiConstants.CATEGORY_BASE)
 @RequiredArgsConstructor
 @Tag(name = "Category", description = "Category API")
 public class CategoryController {

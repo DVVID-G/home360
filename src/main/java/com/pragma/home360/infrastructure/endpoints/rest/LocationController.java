@@ -5,6 +5,7 @@ import com.pragma.home360.application.dto.response.LocationResponse;
 import com.pragma.home360.application.dto.response.SaveLocationResponse;
 import com.pragma.home360.application.services.LocationService;
 import com.pragma.home360.domain.model.LocationModel;
+import com.pragma.home360.infrastructure.constants.ApiConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Location")
+@RequestMapping(ApiConstants.LOCATION_BASE)
 @RequiredArgsConstructor
 @Tag(name = "Location", description = "Location API")
 public class LocationController {

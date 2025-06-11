@@ -4,6 +4,7 @@ import com.pragma.home360.application.dto.request.SaveDepartmentRequest;
 import com.pragma.home360.application.dto.response.DepartmentResponse;
 import com.pragma.home360.application.dto.response.SaveDepartmentResponse;
 import com.pragma.home360.application.services.DepartmentService;
+import com.pragma.home360.infrastructure.constants.ApiConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Department")
+@RequestMapping(ApiConstants.DEPARTMENT_BASE)
 @RequiredArgsConstructor
 @Tag(name = "Department", description = "Department API")
 

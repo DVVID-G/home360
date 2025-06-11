@@ -5,6 +5,7 @@ import com.pragma.home360.application.dto.request.SaveUserRequest;
 import com.pragma.home360.application.dto.response.SaveUserResponse;
 import com.pragma.home360.application.dto.response.UserResponse;
 import com.pragma.home360.application.services.UserService;
+import com.pragma.home360.infrastructure.constants.ApiConstants;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping(ApiConstants.USERS_BASE)
 @RequiredArgsConstructor
 @Tag(name = "User", description = "User API")
 public class UserController {
