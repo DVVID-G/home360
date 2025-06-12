@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class LocationUseCaseTest {
+class LocationUseCaseTest {
 
     @Mock
     private LocationPersistencePort locationPersistencePort;
@@ -36,12 +36,7 @@ public class LocationUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        // Creamos un LocationModel con algunos valores de prueba
         locationModel = new LocationModel(1L,new CityModel(1L, "cityName","cityDescription" ,new DepartmentModel(1L, "Valle del Cauca", "Departamento del Valle del Cauca")),"barrio");
-        // Si LocationModel tuviera más propiedades, se podrían asignar aquí
-        // Por ejemplo: locationModel.setAddress("Dirección de prueba");
-
-        // Creamos un CityModel con un nombre de prueba
         cityModel = new CityModel();
         cityModel.setName("TestCity");
     }

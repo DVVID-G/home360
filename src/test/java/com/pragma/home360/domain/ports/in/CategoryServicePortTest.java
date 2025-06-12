@@ -49,7 +49,4 @@ class CategoryServicePortTest {
 
     }
 
-    @Test
-    void getCategoryByName() {
-    }
 }

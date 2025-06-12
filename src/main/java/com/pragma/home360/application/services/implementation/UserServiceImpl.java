@@ -6,7 +6,6 @@ import com.pragma.home360.application.dto.response.SaveUserResponse;
 import com.pragma.home360.application.dto.response.UserResponse;
 import com.pragma.home360.application.mappers.UserDtoMapper;
 import com.pragma.home360.application.services.UserService;
-import com.pragma.home360.domain.model.UserModel;
 import com.pragma.home360.domain.ports.in.UserServicePort;
 import com.pragma.home360.infrastructure.entities.UserEntity;
 import com.pragma.home360.infrastructure.repositories.mysql.UserRepository;
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<UserResponse> getUsers(Integer page, Integer size, boolean orderAsc) {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
-        Page<UserEntity> pageEntities = userRepository.findAll(pageable);;
+        Page<UserEntity> pageEntities = userRepository.findAll(pageable);
         return pageEntities.map(userDtoMapper::entityToResponse);
     }
 
